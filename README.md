@@ -1,1 +1,1 @@
-# Seleksi-IRK-TSP
+Seleksi IRK TSP
