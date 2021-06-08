@@ -1,15 +1,32 @@
-<!doctype html>
-<html>
+{% extends 'base.html' %}
 
-<body style="font-family:arial, sans-serif">
-    <h1 style="background:lightblue;padding:10px">
-            Plotly Chart Demo
-    </h1>
-    
-    <p>Click to see charts on different pages</p>
-    
-    <h1><a href="chart1">Fruit in North America</a></h1>
-    <h1><a href="chart2">Vegetables in Europe</a></h1>
+{% block head %}
+<title>Main Menu</title>
+{% endblock %}
 
-</body>
-</html>
+{% block body %}
+<p><a href="graph">Tes</a></p>
+<h1>Input langsung</h1>
+<div class="form1">
+    <form action="/graph" method="POST" enctype=multipart/form-data>
+        <p>Nama lokasi yang dituju</p>
+        <label for="lokasi">Nama lokasi</label>
+        <input type="text" id="lokasi" name="lokasi" value="lokasi">
+        <p>Koordinat lokasi</p>
+        <input type="number" id="koordinat" name="koordinat" min="-9999" max="9999">
+        <label for="identitas">Identitas Kurir</label><br>
+        <input type="radio" id="desc" name="arah" value="desc">
+        <label for="female">Descending</label><br><br>
+        <input type="submit" value="langsung"><br>
+    </form>
+</div>
+
+<h1>Input File</h1>
+<div class="form2">
+    <form action="/graph" method="POST" enctype=multipart/form-data>
+        <input type="file" accept=".csv" name="databubble" id="databubble">
+        <input type="submit" value="file">
+    </form> 
+</div>
+
+{% endblock %}
