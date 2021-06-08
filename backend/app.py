@@ -59,8 +59,10 @@ def graph():
         graf.tambahAwal([koorlokasi[0][0]],[koorlokasi[0][1]], [namalokasi[0]])
 
         graf.editFig()
+        graphJSON = graf.getGraph()
+        print(graphJSON)
         graf.visualize()
-    #graphJSON = graf.getGraph()
+    
     return redirect(url_for(".index"))
 
 if __name__ == "__main__":
