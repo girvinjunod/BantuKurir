@@ -16,12 +16,13 @@ def graph():
     #paling ini dibuat post aj, nanti ngevisualize per input
     anamalokasi = [["Perusahaan", "Indomaret", "Neraka", "ITB", "Rumah Yahya"]]
     akoorlokasi = [[[0,0], [3,4], [12,3], [-5,-7], [6,-3]]]
+    awal = 0
     for i in range(len(anamalokasi)):
         namalokasi = anamalokasi[i]
         koorlokasi = akoorlokasi[i]
         n = len(koorlokasi)
         jaraklokasi = getDistance(koorlokasi)
-        res, jalur = solveTSP(jaraklokasi)
+        res, jalur = solveTSP(jaraklokasi, awal)
         teks, listnamahasil = out(res,jalur,namalokasi)
         node_x = []
         node_y = []
@@ -30,6 +31,25 @@ def graph():
             node_y.append(i[1])
         graf = Graf(node_x,node_y,namalokasi)
         
+
+        #cari node terjauh
+        atas = 0
+        kanan = 0
+        bawah = 0
+        kiri = 0
+        for i in koorlokasi:
+            if i[0] > kanan:
+                kanan = i[0]
+            if i[0] < kiri:
+                kiri = i[0]
+            if i[1] > atas:
+                atas = i[1]
+            if i[1] < bawah:
+                bawah = i[1]
+        kanan += 1.5
+        kiri -= 1.5
+        bawah -= 1.5
+        atas += 1.5
 
         #Isi jalur di graf
         for i in range(n):
@@ -59,8 +79,23 @@ def graph():
         graf.tambahAwal([koorlokasi[0][0]],[koorlokasi[0][1]], [namalokasi[0]])
 
         graf.editFig()
+
+        xanimate = []
+        yanimate = []
+        for i in range(len(jalur) - 1):
+            p1 = koorlokasi[jalur[i]]
+            p2 = koorlokasi[jalur[i+1]]
+            antarkoor = intermediates(p1, p2, nb_points=5)
+            for i in antarkoor:
+                xanimate.append(i[0])
+                yanimate.append(i[1])
+            xanimate.append(p2[0])
+            yanimate.append(p2[1])
+    
+        graf.addAnimation(xanimate,yanimate,atas,kanan,bawah,kiri)
+
         graphJSON = graf.getGraph()
-        print(graphJSON)
+        #print(graphJSON)
         graf.visualize()
     
     return redirect(url_for(".index"))

@@ -41,13 +41,12 @@ def tsp(awal, node, dist):
 
     
 
-def solveTSP(dist):
+def solveTSP(dist, awal):
     n = len(dist)
     if n == 1:
         return 0
     if n == 2:
         return 2*(dist[0][1])
-    awal = 0
     node = []
     for i in range(1, n):
         node.append(i)
@@ -73,7 +72,16 @@ def out(res,jalur,namalokasi):
     return string, getJalurNama(jalur,namalokasi)[1]
 
 
+def intermediates(p1, p2, nb_points=8):
+    """"Return a list of nb_points equally spaced points
+    between p1 and p2"""
+    # If we have 8 intermediate points, we have 8+1=9 spaces
+    # between p1 and p2
+    x_spacing = (p2[0] - p1[0]) / (nb_points + 1)
+    y_spacing = (p2[1] - p1[1]) / (nb_points + 1)
 
+    return [[p1[0] + i * x_spacing, p1[1] +  i * y_spacing] 
+            for i in range(1, nb_points+1)]
 
 if __name__ == '__main__':
     #input
@@ -90,5 +98,5 @@ if __name__ == '__main__':
         [6,13,0,12],
         [8,8,9,0]]
     #Solve TSP
-    res, jalur = solveTSP(jaraklokasi)
+    res, jalur = solveTSP(jaraklokasi, 0)
     print(out(res,jalur,namalokasi))
