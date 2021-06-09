@@ -20,6 +20,7 @@ def graph():
     for i in range(len(anamalokasi)):
         namalokasi = anamalokasi[i]
         koorlokasi = akoorlokasi[i]
+        titikawal = koorlokasi[awal]
         n = len(koorlokasi)
         jaraklokasi = getDistance(koorlokasi)
         res, jalur = solveTSP(jaraklokasi, awal)
@@ -91,8 +92,13 @@ def graph():
                 yanimate.append(i[1])
             xanimate.append(p2[0])
             yanimate.append(p2[1])
-    
-        graf.addAnimation(xanimate,yanimate,atas,kanan,bawah,kiri)
+        nodex = []
+        nodey = []
+        for i in range(n):
+            if node_x[i] != titikawal[0] and node_y[i] != titikawal[1]:
+                nodex.append(node_x[i])
+                nodey.append(node_y[i])
+        graf.addAnimation(xanimate,yanimate,atas,kanan,bawah,kiri, nodex, nodey, namalokasi)
 
         graphJSON = graf.getGraph()
         #print(graphJSON)

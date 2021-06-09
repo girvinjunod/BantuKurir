@@ -40,7 +40,7 @@ def tsp(awal, node, dist):
     return res
 
     
-
+#awal = indeks node awal
 def solveTSP(dist, awal):
     n = len(dist)
     if n == 1:
