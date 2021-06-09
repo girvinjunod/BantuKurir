@@ -11,13 +11,19 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def index():
     return render_template('index.html')
 
-@app.route('/graph')
+@app.route('/graph', methods = ['POST'])
 def graph():
     #paling ini dibuat post aj, nanti ngevisualize per input
+    print("Halo")
     anamalokasi = [["Perusahaan", "Indomaret", "Neraka", "ITB", "Rumah Yahya"]]
     akoorlokasi = [[[0,0], [3,4], [12,3], [-5,-7], [6,-3]]]
     awal = 0
+    #v
+    #identitas
+    #waktu
+
     for i in range(len(anamalokasi)):
+        v = 10 #km/jam
         namalokasi = anamalokasi[i]
         koorlokasi = akoorlokasi[i]
         titikawal = koorlokasi[awal]
@@ -25,6 +31,7 @@ def graph():
         jaraklokasi = getDistance(koorlokasi)
         res, jalur = solveTSP(jaraklokasi, awal)
         teks, listnamahasil = out(res,jalur,namalokasi)
+        waktu = getTime(v, res)
         node_x = []
         node_y = []
         for i in koorlokasi:
@@ -103,7 +110,10 @@ def graph():
         graphJSON = graf.getGraph()
         #print(graphJSON)
         graf.visualize()
-    
+    #jalur tulisan
+    #jalur graph
+    #cost terkecil
+    #Estimasi waktu
     return redirect(url_for(".index"))
 
 if __name__ == "__main__":

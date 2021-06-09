@@ -44,9 +44,9 @@ def tsp(awal, node, dist):
 def solveTSP(dist, awal):
     n = len(dist)
     if n == 1:
-        return 0
+        return 0, [awal]
     if n == 2:
-        return 2*(dist[0][1])
+        return 2*(dist[0][1]), [0, 1, 0]
     node = []
     for i in range(1, n):
         node.append(i)
@@ -83,6 +83,9 @@ def intermediates(p1, p2, nb_points=8):
     return [[p1[0] + i * x_spacing, p1[1] +  i * y_spacing] 
             for i in range(1, nb_points+1)]
 
+def getTime(v,s):
+    return s/v
+
 if __name__ == '__main__':
     #input
     namalokasi = ["Perusahaan", "Indomaret", "Neraka", "ITB", "Rumah Yahya"]
@@ -100,3 +103,5 @@ if __name__ == '__main__':
     #Solve TSP
     res, jalur = solveTSP(jaraklokasi, 0)
     print(out(res,jalur,namalokasi))
+    v = 10 #km/jam, asumsi jarak koordinat dalam km
+    print(getTime(v,res))
