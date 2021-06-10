@@ -37,24 +37,32 @@ Frontend menggunakan ReactJS karena ReactJS memudahkan desain UI dan membuat UI 
 2. Untuk bagian penyelesaian TSP dari input, ada di kotak bagian kiri
 3. Input untuk TSP Solver dapat berupa file atau input langsung
 ### Input File
-1. Tekan tombol input file lalu masukkan file-file yang diinginkan. File harus dalam bentuk .txt dan sesuai format
+1. Tekan tombol input file lalu masukkan file-file yang diinginkan. File harus dalam bentuk .txt dan sesuai format. Format dapat dilihat di bawah ini atau di file template.txt di folder test
 2. Tekan tombol `Cari Jalur Terpendek` yang ada di bawah input file untuk melihat jawaban dari file-file yang dimasukkan
 3. Jawaban dapat dilihat di bagian bawah kotak bagian kiri
 
 #### Format File
 Format:
 Nama Lokasi: Perusahaan, lokasiA, string
+
 Koordinat: (0,0) | (floatx,floaty) | (x,y)
+
 Identitas Kurir: string
+
 Waktu Pengiriman: HH:MM:SS
+
 Kecepatan Rata-rata Kurir: float
 
 
 Contoh:
 Nama Lokasi: Perusahaan, Indomaret, Neraka, ITB, Rumah
+
 Koordinat: (-3,-3) | (3,4) | (12,3) | (-5,-7) | (6,-3)
+
 Identitas Kurir: Kevin
+
 Waktu Pengiriman: 07:12:00
+
 Kecepatan Rata-rata Kurir: 20
 
 ### Input Langsung
