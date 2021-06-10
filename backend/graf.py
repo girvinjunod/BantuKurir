@@ -136,10 +136,10 @@ class Graf:
 if __name__ == '__main__':
     #Bikin ga bisa cuma titik awal doang
     namalokasi = ["Perusahaan", "Indomaret", "Neraka", "ITB", "Rumah Yahya"]
-    koorlokasi = [[0,0], [3,4], [12,3], [-5,-7], [6,-3]]
+    koorlokasi = [[-3,-3], [3,4], [12,3], [-5,-7], [6,-3]]
     node_x = []
     node_y = []
-    titikawal = [0,0]
+    titikawal = koorlokasi[0]
     for i in koorlokasi:
         node_x.append(i[0])
         node_y.append(i[1])

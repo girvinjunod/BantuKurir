@@ -1,37 +1,110 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for,request
+import mysql.connector
+import datetime
 
 from graf import Graf
 from tsp import *
+
 app = Flask(__name__)
 UPLOAD_FOLDER = 'test'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  database="tspirk"
+)
+mycursor = mydb.cursor()
+
 
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
+@app.route('/data', methods = ['POST'])
+def data():
+    message = request.get_json()
+    identitas = message['identitas']['nama']
+    tanggal = message['tanggal']['tanggal']
+    print(identitas)
+    print(tanggal)
+    sql = "SELECT jalur,waktu,estimasi,cost FROM tsp where DATE(tanggal_pengiriman) = %s and identitas_kurir = %s"
+    val = (tanggal, identitas)
+    mycursor.execute(sql, val)
+    ajalur = []
+    awaktu = []
+    aestimasi = []
+    acost = []
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        ajalur.append(x[0])
+        awaktu.append(str(x[1]))
+        aestimasi.append(str(x[2]))
+        acost.append(x[3])
+    if len(ajalur) == 0:
+        obj = {"found": False, "msg": "Pengiriman tidak ditemukan"}
+        print(obj)
+        return obj
+    obj = {"found": True, "jalur": ajalur, "waktu": awaktu, "estimasi": aestimasi, "cost": acost}
+    print(obj)
+    return obj
+
 @app.route('/graph', methods = ['POST'])
 def graph():
-    #paling ini dibuat post aj, nanti ngevisualize per input
-    print("Halo")
-    anamalokasi = [["Perusahaan", "Indomaret", "Neraka", "ITB", "Rumah Yahya"]]
-    akoorlokasi = [[[0,0], [3,4], [12,3], [-5,-7], [6,-3]]]
+    message = request.get_json()
+    anamalokasi = message['namalokasi']
+    akoorlokasi = message['koorlokasi']
+    namakurir = message['identitas']
+    waktu = message['waktu']
+    kecepatan = (message['kecepatan'])
+
+    for i in akoorlokasi:
+        for j in i:
+            j[0] = float(j[0])
+            j[1] = float(j[1])
+
+    for i in range(len(kecepatan)):
+        kecepatan[i] = float(kecepatan[i])        
+    print(message)
+    print(anamalokasi)
+    print(akoorlokasi)
+    print(namakurir)
+    print(waktu)
+    print(kecepatan)
     awal = 0
-    #v
-    #identitas
-    #waktu
+
+    #jalur tulisan
+    ajalur = []
+    #jalur graph
+    agraph = []
+    #cost terkecil
+    ajarak = []
+    #Estimasi waktu
+    aestimasi = []
 
     for i in range(len(anamalokasi)):
-        v = 10 #km/jam
+        print("masuk")
+        v = kecepatan[i]
+        mulai = waktu[i]
+        identitas = namakurir[i]
         namalokasi = anamalokasi[i]
         koorlokasi = akoorlokasi[i]
         titikawal = koorlokasi[awal]
+
+
         n = len(koorlokasi)
         jaraklokasi = getDistance(koorlokasi)
         res, jalur = solveTSP(jaraklokasi, awal)
-        teks, listnamahasil = out(res,jalur,namalokasi)
-        waktu = getTime(v, res)
+        teksjalur, teksjarak, listnamahasil = out(res,jalur,namalokasi)
+        time = getEstimate(v, res, mulai)
+        aestimasi.append(str(time))
+        ajalur.append(teksjalur)
+        ajarak.append(teksjarak)
+
         node_x = []
         node_y = []
         for i in koorlokasi:
@@ -106,15 +179,36 @@ def graph():
                 nodex.append(node_x[i])
                 nodey.append(node_y[i])
         graf.addAnimation(xanimate,yanimate,atas,kanan,bawah,kiri, nodex, nodey, namalokasi)
+        
+        #simpen di db
+        dbjalur, sampah = getJalurNama(jalur, namalokasi)
+        cost = "{:.4f}".format(res)
+
+        sql = "INSERT INTO tsp (identitas_kurir, jalur, waktu, estimasi, cost) VALUES (%s, %s, %s, %s, %s)"
+        val = (identitas, dbjalur, mulai, str(time), cost)
+        #mycursor.execute(sql, val)
+        #mydb.commit()
+
+
 
         graphJSON = graf.getGraph()
-        #print(graphJSON)
-        graf.visualize()
+        agraph.append(graphJSON)
+        #graf.visualize()
+
     #jalur tulisan
+    #print(ajalur)
+
     #jalur graph
+    #print(agraph)
+
     #cost terkecil
+    #print(ajarak)
+
     #Estimasi waktu
-    return redirect(url_for(".index"))
+    #print(aestimasi)
+
+    obj = {"jalur": ajalur,"graf": agraph, "jarak": ajarak, "estimasi": aestimasi}
+    return obj
 
 if __name__ == "__main__":
     app.run(debug = True)

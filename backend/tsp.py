@@ -1,3 +1,5 @@
+import datetime
+
 def edistance(k1, k2):
     x1 = k1[0]
     y1 = k1[1]
@@ -66,10 +68,9 @@ def getJalurNama(jalur,namalokasi):
     return nama, listnama
 
 def out(res,jalur,namalokasi):
-    string= []
-    string.append("Jalur terpendek: " + getJalurNama(jalur,namalokasi)[0])
-    string.append("Jarak: " + str(res))
-    return string, getJalurNama(jalur,namalokasi)[1]
+    teksjalur = "Jalur: " + getJalurNama(jalur,namalokasi)[0]
+    teksjarak = "Jarak: " + "{:.4f}".format(res) +" km"
+    return teksjalur, teksjarak, getJalurNama(jalur,namalokasi)[1]
 
 
 def intermediates(p1, p2, nb_points=8):
@@ -85,6 +86,18 @@ def intermediates(p1, p2, nb_points=8):
 
 def getTime(v,s):
     return s/v
+
+def get_sec(time_str):
+    h, m, s = time_str.split(':')
+    return int(h) * 3600 + int(m) * 60 + int(s)
+
+def getEstimate(v,s,time):
+    nowsec = get_sec(time)
+    plus = getTime(v,s)
+    plus = int(plus * 3600)
+    res = nowsec + plus
+    return datetime.timedelta(seconds=res % 86400)
+
 
 if __name__ == '__main__':
     #input
@@ -104,4 +117,6 @@ if __name__ == '__main__':
     res, jalur = solveTSP(jaraklokasi, 0)
     print(out(res,jalur,namalokasi))
     v = 10 #km/jam, asumsi jarak koordinat dalam km
-    print(getTime(v,res))
+    print(int(res/v * 3600))
+    a = getEstimate(v, res, '23:53:43')
+    print(a)
