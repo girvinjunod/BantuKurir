@@ -51,28 +51,22 @@ Frontend menggunakan ReactJS karena ReactJS memudahkan desain UI dan membuat UI 
 #### Format File
 ##### Format:
 
-Nama Lokasi: Perusahaan, lokasiA, string
-
-Koordinat: (0,0) | (floatx,floaty) | (x,y)
-
-Identitas Kurir: string
-
-Waktu Pengiriman: HH:MM:SS
-
-Kecepatan Rata-rata Kurir: float
+  Nama Lokasi: Perusahaan, lokasiA, string
+  \
+  Koordinat: (0,0) | (floatx,floaty) | (x,y)    
+  Identitas Kurir: string
+  \
+  Waktu Pengiriman: HH:MM:SS    
+  Kecepatan Rata-rata Kurir: float
 
 
 ##### Contoh:
 
-Nama Lokasi: Perusahaan, Indomaret, Neraka, ITB, Rumah
-
-Koordinat: (-3,-3) | (3,4) | (12,3) | (-5,-7) | (6,-3)
-
-Identitas Kurir: Kevin
-
-Waktu Pengiriman: 07:12:00
-
-Kecepatan Rata-rata Kurir: 20
+  Nama Lokasi: Perusahaan, Indomaret, Neraka, ITB, Rumah    
+  Koordinat: (-3,-3) | (3,4) | (12,3) | (-5,-7) | (6,-3)    
+  Identitas Kurir: Kevin    
+  Waktu Pengiriman: 07:12:00    
+  Kecepatan Rata-rata Kurir: 20   
 
 ### Input Langsung
 1. Untuk kolom titik awal pengiriman, identitas kurir, waktu pengiriman, dan kecepatan rata-rata kurir, isi kolom yang ada dengan input yang sesuai
