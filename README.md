@@ -1,3 +1,10 @@
+## Table of contents
+* [Algoritma TSP](#algoritma-tsp)
+* [Teknologi](#teknologi)
+* [Cara Menjalankan Program](#cara-menjalankan-program)
+* [Author](#author)
+
+
 # Algoritma TSP
 Algoritma TSP yang digunakan adalah algoritma Divide-and-Conquer. Alasannya adalah karena algoritma Divide-and-Conquer cocok untuk penyelesaian TSP. Algoritma Divide-and-Conquer juga pasti dapat menghasilkan hasil optimal tidak seperti algoritma lain seperti Greedy. Algoritma Divide-and-Conquer juga jauh lebih cepat dari algoritma seperti Brute Force dalam menyelesaikan TSP. Algoritma Dynamic Programming tidak dipakai karena dalam penyelesaian rekursif TSP, tidak begitu banyak dilakukan perhitungan ulang dari sub-problem yang sudah pernah diselesaikan dan algoritmanya hanya terdiri dari perbandingan-perbandingan saja. Oleh karena itu, pembuat menilai penggunaan dynamic programming tidak begitu berpengaruh ke kecepatan algoritma dan akan menambah beban dari menyimpan hasil-hasil perhitungan.
 # Teknologi
@@ -82,3 +89,6 @@ Kecepatan Rata-rata Kurir: 20
 2. Tekan tombol `Tentukan Identitas Kurir` dan `Tentukan Tanggal Pengiriman` untuk menyimpan input masing-masing
 3. Tekan tombol `clear` untuk menghapus semua input di bagian ini
 5. Ketika semua input sudah tersimpan, tekan tombol `Cari` untuk melihat data dari semua pengiriman yang memiliki identitas kurir dan tanggal pengiriman yang sama dengan input
+
+# Author
+- Girvin Junod 13519096
