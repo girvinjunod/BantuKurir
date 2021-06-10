@@ -10,18 +10,46 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+
+.title{
+  text-align: left;
+}
+
 .container {
-  max-width: 750px;
-  margin: 30px auto;
+  max-width: 730px;
+  margin: 15px;
+  margin-right: 5px;
   overflow: auto;
   min-height: 300px;
   border: 1px solid steelblue;
   padding: 30px;
   border-radius: 5px;
   text-align: center;
+  float: left;
 }
 
+.container2 {
+  max-width: 700px;
+  min-width: 550px;
+  margin: 15px;
+  overflow: auto;
+  min-height: 300px;
+  border: 1px solid steelblue;
+  padding: 30px;
+  border-radius: 5px;
+  text-align: center;
+  float: right;
+}
+
+
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header2 {
   display: flex;
   justify-content: space-between;
   align-items: center;

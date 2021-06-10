@@ -16,13 +16,14 @@ const AddIdentitas= ({onAdd}) => {
     
     return (
         <form className="add-form" onSubmit = {onSubmit}>
+            <h3>Identitas Kurir</h3>
             <div className="form-control">
-                <label>Identitas Kurir</label>
+                <label>Nama Kurir</label>
                 <input type = "text" placeholder="Nama Kurir" value={nama} 
                 onChange ={(e) => setNama(e.target.value)}
                 />
             </div>
-            <input type='submit' className='btn btn-block' value='Set Identitas Kurir'/>
+            <input type='submit' className='btn btn-block' value='Tentukan Identitas Kurir'/>
         </form>
     )
 }

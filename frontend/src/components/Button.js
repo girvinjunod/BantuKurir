@@ -9,7 +9,7 @@ const Button = ({text, onClick}) => {
 }
 
 Button.defaultProps = {
-    text : "Jawaban",
+    text : "Clear",
 }
 
 Button.propTypes = {

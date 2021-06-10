@@ -20,8 +20,9 @@ const AddKoordinat = ({onAdd}) => {
     
     return (
         <form className="add-form" onSubmit = {onSubmit}>
+            <h3>Lokasi Pengiriman</h3>
             <div className="form-control">
-                <label>Lokasi</label>
+                <label>Nama Lokasi</label>
                 <input type = "text" placeholder="Nama Lokasi" value={lokasi} 
                 onChange ={(e) => setLokasi(e.target.value)}
                 />

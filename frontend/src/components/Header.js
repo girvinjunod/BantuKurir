@@ -1,14 +1,14 @@
 import Button from "./Button";
 
-const Header = ({soal, onSubmit}) => {
+const Header = ({onClear, text}) => {
     const onClick = () =>{
         console.log("tes")
-        onSubmit([],[])
+        onClear()
     };
     return (
         <header className = 'header'>
-            <h1>TSP Solver</h1>
-            <Button onClick = {onClick}/>
+            <h1>{text}</h1>
+            <Button onClick = {onClick} text="Clear"/>
         </header>
     )
 }
