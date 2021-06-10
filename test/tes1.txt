@@ -1,0 +1,5 @@
+Nama Lokasi: Perusahaan, ITB
+Koordinat: (0,0) | (1.5, 6.9)
+Identitas Kurir: Joko
+Waktu Pengiriman: 12:12:12
+Kecepatan Rata-rata Kurir: 4.20

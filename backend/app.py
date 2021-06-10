@@ -4,12 +4,9 @@ import datetime
 
 from graf import Graf
 from tsp import *
+from parse import *
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'test'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-
 
 
 mydb = mysql.connector.connect(
@@ -19,64 +16,8 @@ mydb = mysql.connector.connect(
 )
 mycursor = mydb.cursor()
 
-
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/data', methods = ['POST'])
-def data():
-    message = request.get_json()
-    identitas = message['identitas']['nama']
-    tanggal = message['tanggal']['tanggal']
-    print(identitas)
-    print(tanggal)
-    sql = "SELECT jalur,waktu,estimasi,cost FROM tsp where DATE(tanggal_pengiriman) = %s and identitas_kurir = %s"
-    val = (tanggal, identitas)
-    mycursor.execute(sql, val)
-    ajalur = []
-    awaktu = []
-    aestimasi = []
-    acost = []
-    myresult = mycursor.fetchall()
-    for x in myresult:
-        ajalur.append(x[0])
-        awaktu.append(str(x[1]))
-        aestimasi.append(str(x[2]))
-        acost.append(x[3])
-    if len(ajalur) == 0:
-        obj = {"found": False, "msg": "Pengiriman tidak ditemukan"}
-        print(obj)
-        return obj
-    obj = {"found": True, "jalur": ajalur, "waktu": awaktu, "estimasi": aestimasi, "cost": acost}
-    print(obj)
-    return obj
-
-@app.route('/graph', methods = ['POST'])
-def graph():
-    message = request.get_json()
-    anamalokasi = message['namalokasi']
-    akoorlokasi = message['koorlokasi']
-    namakurir = message['identitas']
-    waktu = message['waktu']
-    kecepatan = (message['kecepatan'])
-
-    for i in akoorlokasi:
-        for j in i:
-            j[0] = float(j[0])
-            j[1] = float(j[1])
-
-    for i in range(len(kecepatan)):
-        kecepatan[i] = float(kecepatan[i])        
-    print(message)
-    print(anamalokasi)
-    print(akoorlokasi)
-    print(namakurir)
-    print(waktu)
-    print(kecepatan)
+def prosesInput(anamalokasi, akoorlokasi, namakurir, waktu, kecepatan):
     awal = 0
-
     #jalur tulisan
     ajalur = []
     #jalur graph
@@ -85,9 +26,8 @@ def graph():
     ajarak = []
     #Estimasi waktu
     aestimasi = []
-
+    count = 0
     for i in range(len(anamalokasi)):
-        print("masuk")
         v = kecepatan[i]
         mulai = waktu[i]
         identitas = namakurir[i]
@@ -186,14 +126,15 @@ def graph():
 
         sql = "INSERT INTO tsp (identitas_kurir, jalur, waktu, estimasi, cost) VALUES (%s, %s, %s, %s, %s)"
         val = (identitas, dbjalur, mulai, str(time), cost)
-        #mycursor.execute(sql, val)
-        #mydb.commit()
+        mycursor.execute(sql, val)
+        mydb.commit()
 
 
 
         graphJSON = graf.getGraph()
         agraph.append(graphJSON)
-        #graf.visualize()
+        graf.visualize(count)
+        count +=1
 
     #jalur tulisan
     #print(ajalur)
@@ -207,7 +148,80 @@ def graph():
     #Estimasi waktu
     #print(aestimasi)
 
-    obj = {"jalur": ajalur,"graf": agraph, "jarak": ajarak, "estimasi": aestimasi}
+    obj = {"valid": True, "jalur": ajalur,"graf": agraph, "jarak": ajarak, "estimasi": aestimasi}
+    return obj
+
+
+@app.route('/file', methods = ['POST'])
+def file():
+    uploaded_files = request.files.getlist("files[]")
+    arraytext = []
+    for i in range(len(uploaded_files)):
+        arraytext.append(uploaded_files[i].read().decode("utf-8"))
+    parsed = parseMultiple(arraytext)
+    if (parsed[0] == False):
+        obj = {"valid": False, "msg" : "Error Parsing"}
+        return obj
+    anamalokasi = parsed[1]
+    akoorlokasi = parsed[2]
+    namakurir = parsed[3]
+    waktu = parsed[4]
+    kecepatan = parsed[5]
+    obj = prosesInput(anamalokasi, akoorlokasi, namakurir, waktu, kecepatan)
+    return obj
+
+
+@app.route('/data', methods = ['POST'])
+def data():
+    message = request.get_json()
+    identitas = message['identitas']['nama']
+    tanggal = message['tanggal']['tanggal']
+    print(identitas)
+    print(tanggal)
+    sql = "SELECT jalur,waktu,estimasi,cost FROM tsp where DATE(tanggal_pengiriman) = %s and identitas_kurir = %s"
+    val = (tanggal, identitas)
+    mycursor.execute(sql, val)
+    ajalur = []
+    awaktu = []
+    aestimasi = []
+    acost = []
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        ajalur.append(x[0])
+        awaktu.append(str(x[1]))
+        aestimasi.append(str(x[2]))
+        acost.append(x[3])
+    if len(ajalur) == 0:
+        obj = {"found": False, "msg": "Pengiriman tidak ditemukan"}
+        return obj
+    obj = {"found": True, "jalur": ajalur, "waktu": awaktu, "estimasi": aestimasi, "cost": acost}
+    return obj
+
+@app.route('/graph', methods = ['POST'])
+def graph():
+    message = request.get_json()
+    anamalokasi = message['namalokasi']
+    akoorlokasi = message['koorlokasi']
+    namakurir = message['identitas']
+    waktu = message['waktu']
+    kecepatan = (message['kecepatan'])
+
+    for i in akoorlokasi:
+        for j in i:
+            j[0] = float(j[0])
+            j[1] = float(j[1])
+
+    for i in range(len(kecepatan)):
+        kecepatan[i] = float(kecepatan[i])
+
+    #print(message)
+    #print(anamalokasi)
+    #print(akoorlokasi)
+    #print(namakurir)
+    #print(waktu)
+    #print(kecepatan)
+
+    obj = prosesInput(anamalokasi, akoorlokasi, namakurir, waktu, kecepatan)
     return obj
 
 if __name__ == "__main__":

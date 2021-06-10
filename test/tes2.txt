@@ -1,0 +1,5 @@
+Nama Lokasi: Perusahaan, McD
+Koordinat: (0,0) | (-1.5, 4.20)
+Identitas Kurir: Jokowi
+Waktu Pengiriman: 13:13:13
+Kecepatan Rata-rata Kurir: 6.9

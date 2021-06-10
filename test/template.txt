@@ -1,0 +1,15 @@
+Nama Lokasi: Perusahaan, lokasiA, string
+Koordinat: (0,0) | (floatx,floaty) | (x,y)
+Identitas Kurir: string
+Waktu Pengiriman: HH:MM:SS
+Kecepatan Rata-rata Kurir: float
+
+
+
+
+-----contoh
+Nama Lokasi: Perusahaan, Indomaret, Neraka, ITB, Rumah
+Koordinat: (-3,-3) | (3,4) | (12,3) | (-5,-7) | (6,-3)
+Identitas Kurir: Kevin
+Waktu Pengiriman: 07:12:00
+Kecepatan Rata-rata Kurir: 20

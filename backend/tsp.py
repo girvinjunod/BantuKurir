@@ -74,10 +74,7 @@ def out(res,jalur,namalokasi):
 
 
 def intermediates(p1, p2, nb_points=8):
-    """"Return a list of nb_points equally spaced points
-    between p1 and p2"""
-    # If we have 8 intermediate points, we have 8+1=9 spaces
-    # between p1 and p2
+    #nb = jumlah intermediate
     x_spacing = (p2[0] - p1[0]) / (nb_points + 1)
     y_spacing = (p2[1] - p1[1]) / (nb_points + 1)
 

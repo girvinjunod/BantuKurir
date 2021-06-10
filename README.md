@@ -1,72 +1,74 @@
-# Seleksi IRK TSP
+# Algoritma TSP
+Algoritma TSP yang digunakan adalah algoritma Divide-and-Conquer. Alasannya adalah karena algoritma Divide-and-Conquer cocok untuk penyelesaian TSP. Algoritma Divide-and-Conquer juga pasti dapat menghasilkan hasil optimal tidak seperti algoritma lain seperti Greedy. Algoritma Divide-and-Conquer juga jauh lebih cepat dari algoritma seperti Brute Force dalam menyelesaikan TSP. Algoritma Dynamic Programming tidak dipakai karena dalam penyelesaian rekursif TSP, tidak begitu banyak dilakukan perhitungan ulang dari sub-problem yang sudah pernah diselesaikan dan algoritmanya hanya terdiri dari perbandingan-perbandingan saja. Oleh karena itu, pembuat menilai penggunaan dynamic programming tidak begitu berpengaruh ke kecepatan algoritma dan akan menambah beban dari menyimpan hasil-hasil perhitungan.
+# Teknologi
+## Backend
+Flask
 
 
-# BantuKurir-TSP
-## Latar Belakang
-Suatu hari, sebuah perusahaan jasa pengiriman barang memiliki keinginan mulia untuk membuat jalur pengiriman barang menjadi lebih efisien agar kurir-kurirnya bisa menyelesaikan pekerjaan secepat mungkin dan kembali ke rumahnya untuk berkumpul bersama keluarga :hugs:. Untuk mewujudkan keinginan mulianya tersebut, perusahaan membuat sebuah sayembara besar-besaran, siapapun yang berhasil menyuguhkan solusi terbaik dan tercepat akan mendapatkan hadiah yang tak ternilai dari BOS BESAR Perusahaan. 
+Backend menggunakan Flask karena memudahkan penggunaan library Plotly untuk menggambar graf. Framework Flask juga sederhana untuk dipakai sehingga tidak menyulitkan dalam pembuatan backend. Bahasa Python juga cukup fleksibel dalam manipulasi data sehingga memudahkan dalam memroses input dari frontend.
+## Frontend
+ReactJS
 
-Kamu sebagai mahasiswa Teknik Informatika ITB, ca-IRK, anak kebanggaan ayahibu tentunya tak mau kalah dan ingin segera menunjukkan bakat terpendammu kepada sang BOS BESAR Perusahaan, bukannnn???!!
 
-## Spesifikasi Wajib (1500)
-Buatlah sebuah aplikasi web dengan spesifikasi sebagai berikut:
-1. Pengguna dapat memasukkan informasi pengiriman secara **langsung dari website** ataupun melalui **berkas eksternal**, yang terdiri atas:
-  - Nama lokasi yang dituju (termasuk lokasi asal: Perusahaan)
-  - Koordinat dari setiap lokasi
-  - Identitas Kurir (nama)
-  - Lokasi yang menjadi titik asal
-  - Waktu pengiriman
-  - Kecepatan rata-rata kurir
-3. Aplikasi **mampu menerima berkas eksternal lebih dari satu** dan menampilkan semua jalur yang mungkin
-4. Aplikasi mampu **menampilkan jalur ter-efektif** untuk melakukan pengiriman ke semua lokasi yang dimasukkan, dengan lokasi asal merupakan Perusahaan dan akhirnya kembali ke lokasi asal. Hasil yang ditampilkan yang terdiri atas:
-  - Jalur dalam bentuk tulisan
-  - Jalur dalam bentuk graf (lokasi sesuai koordinat)
-  - _Cost_/jarak terpendek yang akan ditempuh sang kurir
-  - Estimasi waktu kurir selesai melakukan pengiriman dan kembali ke Perusahaan
-6. Perhitungan jarak dilakukan dengan jarak Euclidean
-7. Algoritma penyelesaian TSP **dibebaskan** sesuai dengan teknik yang sudah kalian dipelajari di mata kuliah Strategi Algorigma
-8. Framewordk serta Bahasa untuk backend dan frontend **dibebaskan**, silakan explore sebanyak-banyaknya
-9. Tampilan website dibuat **semenarik**, **sekreatif** dan **sejelas** mungkin
-10. **Readme** seminimal mungkin menjelaskan:
-  - Algoritma TSP yang digunakan dan alasan penggunaan
-  - Teknologi yang digunakan untuk backend dan frontend serta alasan penggunaan
-  - Library yang digunakan serta (jika ada) 
-  - Cara menjalankan program
+Frontend menggunakan ReactJS karena ReactJS memudahkan desain UI dan membuat UI merespon ke input dengan cepat karena web dapat langsung di-update melalui ReactJS. Penerimaan dan pengelolaan input juga cukup mudah melalui ReactJS dan bagian-bagian dari web dapat dengan mudah dipisahkan melalui struktur ReactJS.
 
-## Spesifikasi Bonus (1000)
-Tambahkan sebuah fitur untuk menampilkan informasi pengiriman kurir dengan spesifikasi sebagai berikut:
-1. Pengguna dapat memasukkan informasi pengiriman berupa:
-  - Identitas kurir (nama)
-  - Tanggal Pengiriman
-2. Aplikasi mampu menampilkan informasi pengiriman berupa:
-  - Jalur yang ditempuh kurir (dalam tulisan saja)
-  - Waktu pengiriman
-  - Estimasi waktu pengiriman selesai
-  - _Cost_/jarak terpendek dari jalur yang ditempuh
-4. Teknologi penyimpanan data (database) **dibebaskan** (**tidak boleh** menggunakan berkas txt, csv)
+# Library
+## Python
+1. Plotly
+2. Numpy
+3. Datetime
+4. MySQL Connector
+## ReactJS
+1. Axios
 
-Tambahkan fitur menyalakan animasi graf:
-1. Tambahkan animasi pada tampilan graf yang menampilkan urutan jalur yang akan ditempuh kurir
-2. Pengguna dapat memainkan animasi selama graf masi ditampilkan
+# Cara Menjalankan Program
+## Setup Backend
+1. cd ke folder `backend`
+2. Jalankan perintah `python app.py`
 
-## Asumsi Pengerjaan
-1. Jalur antar dua lokasi adalah garis lurus
-2. Setiap jalur yang ada berlaku dua arah
-3. Tanggal pengiriman sama dengan tanggal pencarian jalur
+## Setup Frontend
+1. cd ke folder `frontend`
+2. Jalankan perintah `npm install`
+3. Jalankan perintah `npm start`
+4. Aplikasi web akan terbuka di url `http://localhost:3000`
 
-## Komponen Penilaian
-1. Kebenaran program dan fungsionalitasnya
-2. Algoritma yang digunakan beserta alasan penggunaannya
-3. Clean Code
-4. Modularitas
-5. Keindahan UI
+## Menggunakan Program
+1. Web terbagi menjadi dua bagian yaitu untuk bagian TSP Solver dan pencarian hasil dari database. Dua bagian ini dapat dilihat dari dua kotak yang ada.
+2. Untuk bagian penyelesaian TSP dari input, ada di kotak bagian kiri
+3. Input untuk TSP Solver dapat berupa file atau input langsung
+### Input File
+1. Tekan tombol input file lalu masukkan file-file yang diinginkan. File harus dalam bentuk .txt dan sesuai format
+2. Tekan tombol `Cari Jalur Terpendek` yang ada di bawah input file untuk melihat jawaban dari file-file yang dimasukkan
+3. Jawaban dapat dilihat di bagian bawah kotak bagian kiri
 
-## Pengumpulan
-Silakan buat repository pada github atau gitlab dan invite **gilliantuerah** pada repository kalian.
+#### Format File
+Format:
+Nama Lokasi: Perusahaan, lokasiA, string
+Koordinat: (0,0) | (floatx,floaty) | (x,y)
+Identitas Kurir: string
+Waktu Pengiriman: HH:MM:SS
+Kecepatan Rata-rata Kurir: float
 
-Pastikan repository kalian dalam mode Private.
 
-Jika sudah selesai, silakan kontak melalui line (id line: gillian_tuerah) untuk menjadwalkan waktu demo. 
-    
-## Lain-lain
-Jika terdapat pertanyaan silakan buat **issue** github pada repo ini dan pc aku di line (id line: gillian_tuerah).  
-Terakhirrr, selamat mengerjakan kawan-kawan, usahakan expore sebanyak-banyaknya dan buatnya dengan hati yaaa biar hasilnya juga bisa menyentuh hati PAK BOS BESAR :hugs:.
+Contoh:
+Nama Lokasi: Perusahaan, Indomaret, Neraka, ITB, Rumah
+Koordinat: (-3,-3) | (3,4) | (12,3) | (-5,-7) | (6,-3)
+Identitas Kurir: Kevin
+Waktu Pengiriman: 07:12:00
+Kecepatan Rata-rata Kurir: 20
+
+### Input Langsung
+1. Untuk kolom titik awal pengiriman, identitas kurir, waktu pengiriman, dan kecepatan rata-rata kurir, isi kolom yang ada dengan input yang sesuai
+2. Tekan tombol di bawah tiap kolom tersebut untuk menyimpan nilai input
+3. Untuk menghapus nilai input, tekan tombol 'X' yang ada di samping nilai input yang tersimpan atau masukkan input lagi
+4. Untuk bagian nama lokasi dan koordinat, untuk tiap lokasi serta koordinatnya, isi kolom untuk nama lokasi dan koordinat(x,y) lalu tekan tombol `Tambah Lokasi Pengiriman` untuk menyimpan suatu lokasi dan koordinatnya.
+5. Ulangi langkah 4 untuk setiap pasangan lokasi dan koordinat yang ingin diinput
+6. Untuk menghapus semua input di bagian ini, tekan tombol `clear`
+7. Ketika semua input sudah disimpan, tekan tombol `Cari Jalur Terpendek` yang ada di paling bawah kotak bagian kiri untuk melihat jawaban
+8. Jawaban dapat dilihat di bagian bawah kotak bagian kiri
+
+### Pencarian dari Database
+1. Masukkan nilai untuk kolom identitas dan tanggal
+2. Tekan tombol `Tentukan Identitas Kurir` dan `Tentukan Tanggal Pengiriman` untuk menyimpan input masing-masing
+3. Tekan tombol `clear` untuk menghapus semua input di bagian ini
+5. Ketika semua input sudah tersimpan, tekan tombol `Cari` untuk melihat data dari semua pengiriman yang memiliki identitas kurir dan tanggal pengiriman yang sama dengan input

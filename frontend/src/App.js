@@ -19,6 +19,7 @@ import GetJawaban2 from './components/GetJawaban2';
 import GetJawaban from './components/GetJawaban';
 import Jawaban from './components/Jawaban';
 import Jawaban2 from './components/Jawaban2';
+import AddFile from './components/AddFile';
 
 
 function App() {
@@ -103,6 +104,7 @@ function App() {
     setIdentitas([])
     setWaktu([])
     setKecepatan([])
+    setJawaban([])
   }
   
 
@@ -141,6 +143,7 @@ function App() {
     const deleteAll2 = () => {
       setIdentitas2([])
       setTanggal([])
+      setJawaban2([])
     }
 
   //jawaban
@@ -163,10 +166,28 @@ const getData = async (i,t) => {
     setJawaban2([res.data]);
   })
 }
+
+const getFromFile = async (obj) => {
+  await axios.post('/file', obj).then(res => {
+    console.log(res.data)
+    setJawaban([res.data]);
+  })
+}
+
+
   return (
     <>
     <div className="container">
-      <Header text = "TSP Solver" onClear = {deleteAll}/>
+      <header className = 'title'>
+            <h1>TSP Solver</h1>
+      </header>
+      <div>
+      <header className = 'header'>
+            <h1>Input Dari File</h1>
+      </header>
+      <AddFile onAdd = {getFromFile} onClear = {deleteAll}/>
+      </div>
+      <Header text = "Input Langsung" onClear = {deleteAll}/>
       <AddTitikAsal onAdd = {addTitikAsal} />
       {titikasal.length > 0 ? <TitikAwal titik = {titikasal} onDelete = {deleteTitikAsal}/> : ""}
       <AddKoordinat onAdd = {addKoordinat}/>

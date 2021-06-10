@@ -74,8 +74,8 @@ class Graf:
     def editFig(self):
         self.fig.update_layout(
             autosize=False,
-            width=1300,
-            height=700,
+            width=1250,
+            height=650,
             margin=dict(
                 l=200,
                 r=200,
@@ -124,10 +124,10 @@ class Graf:
         graphJSON = json.dumps(self.fig, cls=plotly.utils.PlotlyJSONEncoder)
         return graphJSON
     
-    def visualize(self): #gambar map dengan center simpul awal
+    def visualize(self, i): #gambar map dengan center simpul awal
         self.fig.update_layout(
         hovermode='closest',
-        title = "Jalur Terpendek Kurir"
+        title = "Jalur Terpendek Kurir untuk Pengiriman ke-"+ str(i+1)
         )
         self.fig.show()
 
@@ -213,4 +213,4 @@ if __name__ == '__main__':
             nodex.append(node_x[i])
             nodey.append(node_y[i])
     graf.addAnimation(xanimate,yanimate,atas,kanan,bawah,kiri, nodex, nodey, namalokasi)
-    graf.visualize()
+    graf.visualize(0)
