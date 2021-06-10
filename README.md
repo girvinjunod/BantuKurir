@@ -1,4 +1,4 @@
-## Daftar Isi
+# Daftar Isi
 * [Algoritma TSP](#algoritma-tsp)
 * [Teknologi](#teknologi)
 * [Cara Menjalankan Program](#cara-menjalankan-program)
