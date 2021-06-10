@@ -1,4 +1,4 @@
-import AnakJawaban2 from "./AnakJawaban.js";
+import AnakJawaban2 from "./AnakJawaban2.js";
 const Jawaban2 = ({jawaban}) => {
     if (jawaban.found){
         //"jalur": ajalur, "waktu": awaktu, "estimasi": aestimasi, "cost": acost
@@ -8,13 +8,13 @@ const Jawaban2 = ({jawaban}) => {
         let acost = jawaban.cost
         let aobj = []
         for (let i = 0; i< ajalur.length; i++){
-            aobj[i] = {id: i, jalur: ajalur[i], jarak: awaktu[i], estimasi: aestimasi[i], cost:acost[i] }
+            aobj[i] = {id: i, jalur: ajalur[i], waktu: awaktu[i], estimasi: aestimasi[i], cost:acost[i] }
         }
             return (
                 <>
                 <br/>
                 <br/>
-                <h2>Hasil Pencarian</h2>
+                <h2>Hasil Pencarian</h2><br/>
                   { aobj.map((s)=> (
                   <AnakJawaban2 key = {s.id} pengiriman= {s} />)) } 
                 </>

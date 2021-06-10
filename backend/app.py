@@ -176,8 +176,6 @@ def data():
     message = request.get_json()
     identitas = message['identitas']['nama']
     tanggal = message['tanggal']['tanggal']
-    print(identitas)
-    print(tanggal)
     sql = "SELECT jalur,waktu,estimasi,cost FROM tsp where DATE(tanggal_pengiriman) = %s and identitas_kurir = %s"
     val = (tanggal, identitas)
     mycursor.execute(sql, val)
