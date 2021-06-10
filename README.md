@@ -5,7 +5,7 @@ Algoritma TSP yang digunakan adalah algoritma Divide-and-Conquer. Alasannya adal
 Flask
 
 
-Backend menggunakan Flask karena memudahkan penggunaan library Plotly untuk menggambar graf. Framework Flask juga sederhana untuk dipakai sehingga tidak menyulitkan dalam pembuatan backend. Bahasa Python juga cukup fleksibel dalam manipulasi data sehingga memudahkan dalam memroses input dari frontend.
+Backend menggunakan Flask karena memudahkan penggunaan library Plotly untuk menggambar graf. Framework Flask juga sederhana untuk dipakai sehingga tidak menyulitkan dalam pembuatan backend. Bahasa Python juga cukup fleksibel dalam manipulasi data sehingga memudahkan dalam memroses input dari frontend. Untuk database digunakan MySQL.
 ## Frontend
 ReactJS
 
@@ -42,7 +42,8 @@ Frontend menggunakan ReactJS karena ReactJS memudahkan desain UI dan membuat UI 
 3. Jawaban dapat dilihat di bagian bawah kotak bagian kiri
 
 #### Format File
-Format:
+##### Format:
+
 Nama Lokasi: Perusahaan, lokasiA, string
 
 Koordinat: (0,0) | (floatx,floaty) | (x,y)
@@ -54,7 +55,8 @@ Waktu Pengiriman: HH:MM:SS
 Kecepatan Rata-rata Kurir: float
 
 
-Contoh:
+##### Contoh:
+
 Nama Lokasi: Perusahaan, Indomaret, Neraka, ITB, Rumah
 
 Koordinat: (-3,-3) | (3,4) | (12,3) | (-5,-7) | (6,-3)
