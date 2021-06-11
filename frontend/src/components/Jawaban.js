@@ -15,7 +15,7 @@ const Jawaban = ({ jawaban }) => {
             <>
             <br/>
             <br/>
-              <h3>Solusi TSP</h3>
+              <h2>Solusi TSP</h2>
               { aobj.map((s)=> (
               <AnakJawaban key = {s.id} pengiriman= {s} />)) } 
             </>

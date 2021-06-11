@@ -1,0 +1,5 @@
+Nama Lokasi: Perusahaan, Laut, Langit, Bumi, Hutan
+Koordinat: (0,0) | (0,10) | (10,10) | (10,0) | (5,5)
+Identitas Kurir: Ming
+Waktu Pengiriman: 10:35:20
+Kecepatan Rata-rata Kurir: 30

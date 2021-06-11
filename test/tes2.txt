@@ -1,5 +1,5 @@
-Nama Lokasi: Perusahaan, McD
-Koordinat: (0,0) | (-1.5, 4.20)
+Nama Lokasi: Perusahaan, McD, BTS, Nugget
+Koordinat: (0,0) | (-1.5, 4.20) | (69, 6.9) | (-42, -10)
 Identitas Kurir: Jokowi
 Waktu Pengiriman: 13:13:13
 Kecepatan Rata-rata Kurir: 6.9

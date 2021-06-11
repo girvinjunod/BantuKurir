@@ -22,6 +22,7 @@ const AddIdentitas= ({onAdd}) => {
                 <input type = "text" placeholder="Nama Kurir" value={nama} 
                 onChange ={(e) => setNama(e.target.value)}
                 />
+                
             </div>
             <input type='submit' className='btn btn-block' value='Tentukan Identitas Kurir'/>
         </form>
